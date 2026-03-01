@@ -8,7 +8,7 @@ Full remotion docs can be found here: https://www.remotion.dev/docs/. Consult th
 
 The Root file is usually named "src/Root.tsx" and looks like this:
 
-```
+```tsx
 import {Composition} from 'remotion';
 import {MyComp} from './MyComp';
 
@@ -33,7 +33,7 @@ A `<Composition>` defines a video that can be rendered. It consists of a React "
 
 Inside a React "component", one can use the "useCurrentFrame()" hook to get the current frame number. Frame numbers start at 0.
 
-```
+```tsx
 export const MyComp: React.FC = () => {
 	const frame = useCurrentFrame();
 	return <div>Frame {frame}</div>;
@@ -46,7 +46,7 @@ Inside a component, regular HTML and SVG tags can be returned. There are special
 
 If a video is included in the component it should use the `<OffthreadVideo>` tag.
 
-```
+```tsx
 import {OffthreadVideo} from 'remotion';
 
 export const MyComp: React.FC = () => {
@@ -65,7 +65,7 @@ OffthreadVideo has a "startFrom" prop that trims the left side of a video by a n
 
 If an non-animated image is included in the component it should use the `<Img>` tag.
 
-```
+```tsx
 import {Img} from 'remotion';
 
 export const MyComp: React.FC = () => {
@@ -75,7 +75,7 @@ export const MyComp: React.FC = () => {
 
 If an animated GIF is included, the "@remotion/gif" package should be installed and the `<Gif>` tag should be used.
 
-```
+```tsx
 import {Gif} from '@remotion/gif';
 
 export const MyComp: React.FC = () => {
@@ -90,7 +90,7 @@ export const MyComp: React.FC = () => {
 
 If audio is included, the `<Audio>` tag should be used.
 
-```
+```tsx
 import {Audio} from 'remotion';
 
 export const MyComp: React.FC = () => {
@@ -100,7 +100,7 @@ export const MyComp: React.FC = () => {
 
 Asset sources can be specified as either a Remote URL or an asset that is referenced from the "public/" folder of the project. If an asset is referenced from the "public/" folder, it should be specified using the "staticFile" API from Remotion.
 
-```
+```tsx
 import {Audio, staticFile} from 'remotion';
 
 export const MyComp: React.FC = () => {
@@ -112,7 +112,7 @@ Audio has a "startFrom" prop that trims the left side of a audio by a number of 
 
 If two elements should be rendered on top of each other, they should be layered using the "AbsoluteFill" component from "remotion".
 
-```
+```tsx
 import {AbsoluteFill} from 'remotion';
 
 export const MyComp: React.FC = () => {
@@ -131,7 +131,7 @@ export const MyComp: React.FC = () => {
 
 Any Element can be wrapped in a "Sequence" component from "remotion" to place the element later in the video.
 
-```
+```tsx
 import {Sequence} from 'remotion';
 
 export const MyComp: React.FC = () => {
@@ -149,7 +149,7 @@ A Sequence has a "durationInFrames" prop that specifies how long the element sho
 
 If a child component of Sequence calls "useCurrentFrame()", the enumeration starts from the first frame the Sequence appears and starts at 0.
 
-```
+```tsx
 import {Sequence} from 'remotion';
 
 export const Child: React.FC = () => {
@@ -169,7 +169,7 @@ export const MyComp: React.FC = () => {
 
 For displaying multiple elements after another, the "Series" component from "remotion" can be used.
 
-```
+```tsx
 import {Series} from 'remotion';
 
 export const MyComp: React.FC = () => {
@@ -193,7 +193,7 @@ The "Series.Sequence" component works like "Sequence", but has no "from" prop. I
 
 For displaying multiple elements after another another and having a transition inbetween, the "TransitionSeries" component from "@remotion/transitions" can be used.
 
-```
+```tsx
 import {
 	linearTiming,
 	springTiming,
@@ -232,7 +232,7 @@ export const MyComp: React.FC = () => {
 
 Remotion needs all of the React code to be deterministic. Therefore, it is forbidden to use the Math.random() API. If randomness is requested, the "random()" function from "remotion" should be used and a static seed should be passed to it. The random function returns a number between 0 and 1.
 
-```
+```tsx
 import {random} from 'remotion';
 
 export const MyComp: React.FC = () => {
@@ -242,7 +242,7 @@ export const MyComp: React.FC = () => {
 
 Remotion includes an interpolate() helper that can animate values over time.
 
-```
+```tsx
 import {interpolate} from 'remotion';
 
 export const MyComp: React.FC = () => {
@@ -263,7 +263,7 @@ The "interpolate()" function accepts a number and two arrays of numbers. The fir
 
 If the "fps", "durationInFrames", "height" or "width" of the composition are required, the "useVideoConfig()" hook from "remotion" should be used.
 
-```
+```tsx
 import {useVideoConfig} from 'remotion';
 
 export const MyComp: React.FC = () => {
@@ -281,7 +281,7 @@ export const MyComp: React.FC = () => {
 
 Remotion includes a "spring()" helper that can animate values over time. Below is the suggested default usage.
 
-```
+```tsx
 import {spring} from 'remotion';
 
 export const MyComp: React.FC = () => {
@@ -349,7 +349,7 @@ When making UI components remember that UI components in Remotion are fundamenta
 
 **Button in Normal React:**
 
-```
+```tsx
 const Button = () => {
   const [clicked, setClicked] = useState(false);
 
@@ -366,7 +366,7 @@ const Button = () => {
 
 **Animated Button in Remotion:**
 
-```
+```tsx
 import { useCurrentFrame, interpolate } from 'remotion';
 
 const AnimatedButton = () => {
